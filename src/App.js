@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "App.css";
 
 function App() {
+  const onClickHandler = () => {
+    alert("click");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "yellow",
+      }}
+    >
+      I made this component
+      <button onClick={onClickHandler}>click</button>
     </div>
   );
 }
