@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import Button from "components/Button";
+import Input from "components/Input";
+import UserBox from "components/UserBox";
 import Layout from "Layout";
 
 const USERS = [
@@ -43,18 +46,20 @@ export default function App() {
   };
 
   const removeButtonHandler = (id) => {
-    //  const newUsers = users.filter((item) => id !== item.id);
-    setUsers((prev) => prev.filter((item) => id !== item.id));
+    const newUser = users.filter((item) => id !== item.id);
+    setUsers(newUser);
   };
 
   return (
     <Layout>
       <div style={{ margin: "20px 0" }}>
-        이름 : <input value={name} onChange={(e) => nameChangeHandler(e)} />
-        <br />
-        나이 : <input value={age} onChange={ageChangeHandler} />
-        <br />
-        <button onClick={addButtonHandler}>추가</button>
+        <Input
+          label="이름"
+          value={name}
+          onChange={(e) => nameChangeHandler(e)}
+        />
+        <Input label="나이" value={age} onChange={(e) => ageChangeHandler(e)} />
+        <Button onClick={addButtonHandler}>추가</Button>
       </div>
 
       <div style={{ display: "flex", gap: "10px" }}>
@@ -63,30 +68,10 @@ export default function App() {
             key={item.id}
             age={item.age}
             name={item.name}
-            removeButtonHandler={() => removeButtonHandler(item.id)}
+            onRemove={() => removeButtonHandler(item.id)}
           />
         ))}
       </div>
     </Layout>
   );
 }
-
-function UserBox({ id, age, name, removeButtonHandler }) {
-  return (
-    <div style={user_style}>
-      <div>{age + "-" + name}</div>
-      <button onClick={removeButtonHandler}>x</button>
-    </div>
-  );
-}
-
-const user_style = {
-  width: "100px",
-  height: "100px",
-  border: "1px solid green",
-  borderRadius: "10px",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-};
