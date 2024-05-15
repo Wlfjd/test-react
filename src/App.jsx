@@ -1,76 +1,38 @@
 import React, { useState } from "react";
 
-import Button from "components/Button";
-import Input from "components/Input";
-import UserBox from "components/UserBox";
+import Box1 from "components/memo_practice/Box1";
+import Box2 from "components/memo_practice/Box2";
+import Box3 from "components/memo_practice/Box3";
 import Layout from "Layout";
 
-const USERS = [
-  {
-    id: 1,
-    age: 30,
-    name: "송종기",
-  },
-  {
-    id: 2,
-    age: 24,
-    name: "송강",
-  },
-  {
-    id: 3,
-    age: 25,
-    name: "김유정",
-  },
-  {
-    id: 4,
-    age: 26,
-    name: "구교환",
-  },
-];
-
 export default function App() {
-  const [users, setUsers] = useState(USERS);
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
+  console.log("App is rendering");
+  const [count, setCount] = useState(0);
 
-  const nameChangeHandler = (e) => {
-    setName(e.target.value);
-  };
-  const ageChangeHandler = (e) => {
-    setAge(e.target.value);
+  const onPlusButtonClickHandler = () => {
+    setCount((prev) => prev + 1);
   };
 
-  const addButtonHandler = () => {
-    const newUser = { id: users.length + 1, age, name };
-    setUsers((prev) => [...prev, newUser]);
+  const onMinusButtonClickHandler = () => {
+    setCount((prev) => prev - 1);
   };
 
-  const removeButtonHandler = (id) => {
-    const newUser = users.filter((item) => id !== item.id);
-    setUsers(newUser);
+  const initCount = () => {
+    setCount(0);
   };
 
   return (
     <Layout>
-      <div style={{ margin: "20px 0" }}>
-        <Input
-          label="이름"
-          value={name}
-          onChange={(e) => nameChangeHandler(e)}
-        />
-        <Input label="나이" value={age} onChange={(e) => ageChangeHandler(e)} />
-        <Button onClick={addButtonHandler}>추가</Button>
+      <h3>카운트 예제입니다!</h3>
+      <p>현재 카운트:{count}</p>
+      <div>
+        <button onClick={onPlusButtonClickHandler}>+</button>
+        <button onClick={onMinusButtonClickHandler}>-</button>
       </div>
-
-      <div style={{ display: "flex", gap: "10px" }}>
-        {users.map((item) => (
-          <UserBox
-            key={item.id}
-            age={item.age}
-            name={item.name}
-            onRemove={() => removeButtonHandler(item.id)}
-          />
-        ))}
+      <div style={{ display: "flex", paddingTop: "10px" }}>
+        <Box1 initCount={initCount} />
+        <Box2 />
+        <Box3 />
       </div>
     </Layout>
   );
